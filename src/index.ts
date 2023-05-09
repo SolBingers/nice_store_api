@@ -1,12 +1,14 @@
 import { Request, Response } from "express";
-
-const express = require('express');
-const dotenv = require('dotenv');
+import express from 'express';
+import dotenv from 'dotenv';
+import { initDB } from "./initDB";
 
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
+
+const sequelize = initDB();
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Nice store api');
