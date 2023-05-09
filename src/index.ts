@@ -1,7 +1,7 @@
-import { Request, Response } from "express";
+import { Request, Response } from 'express';
 import express from 'express';
 import dotenv from 'dotenv';
-import { initDB } from "./initDB";
+import { initDB } from './initDB';
 
 dotenv.config();
 
