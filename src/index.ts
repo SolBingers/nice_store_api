@@ -13,7 +13,7 @@ initDB();
 
 
 app.use(cors());
-app.use(express.static('public'));
+app.use(express.static('../public'));
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Nice store api');
