@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
+import path from 'path';
 import { initDB } from './initDB';
 
 dotenv.config();
@@ -12,8 +13,9 @@ const port = process.env.PORT || 3000;
 initDB();
 
 
+
 app.use(cors());
-app.use(express.static('../public'));
+app.use('/static', express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Nice store api');
