@@ -1,9 +1,27 @@
 import { Phone } from '../models/Phone';
 import { Product } from '../models/Product';
 import lodash from 'lodash';
+import { Category } from '../types/Category';
+import { SortBy } from '../types/SortBy';
 
 function getDiscountPercent(price: number, fullPrice: number) {
   return 100 - price * 100 / fullPrice;
+}
+
+function sortProducts (products: Product[], sort: SortBy) {
+  switch (sort) {
+  case SortBy.Old:
+    return products.sort((a, b) => a.year - b.year);
+    
+  case SortBy.New:
+    return products.sort((a, b) => b.year - a.year);
+
+  case SortBy.Cheap:
+    return products.sort((a, b) => a.price - b.price);
+
+  default:
+    return products;
+  }
 }
 
 export async function getAll() {
@@ -12,13 +30,16 @@ export async function getAll() {
   return products;
 }
 
-export async function getPage(page = 1, count = 8) {
+export async function getPage(page = 1, count = 8, category: Category, sort: SortBy, query = '') {
   const products = await Product.findAll({
+    where: {
+      category,
+    },
     limit: count,
     offset: count * (page - 1),
   });
 
-  return products;
+  return sortProducts(products, sort);
 }
 
 export function getOne(id: string) {
