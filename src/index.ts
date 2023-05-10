@@ -10,11 +10,11 @@ const port = process.env.PORT || 3000;
 
 const sequelize = initDB();
 
-app.use('/static', express.static('public'));
-
 app.get('/', (req: Request, res: Response) => {
   res.send('Nice store api');
 });
+
+app.use('/static', express.static('public'));
 
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);
