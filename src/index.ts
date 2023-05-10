@@ -10,6 +10,8 @@ const port = process.env.PORT || 3000;
 
 const sequelize = initDB();
 
+app.use('/static', express.static('public'));
+
 app.get('/', (req: Request, res: Response) => {
   res.send('Nice store api');
 });
