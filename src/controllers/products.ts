@@ -1,10 +1,11 @@
 import * as productsService from '../services/products';
+import * as phonesService from '../services/phones';
 import { Request, Response } from 'express';
 import { Category } from '../types/Category';
 import { SortBy } from '../types/SortBy';
 
 export const getAll = async (req: Request, res: Response) => {
-  const { 
+  const {
     page = 1, 
     count = 8, 
     category = Category.Phones, 
@@ -12,9 +13,9 @@ export const getAll = async (req: Request, res: Response) => {
     sort = SortBy.New
   } = req.query;
   const products = await productsService.getPage(
-    Number(page), 
-    Number(count), 
-    category as Category, 
+    Number(page),
+    Number(count),
+    category as Category,
     sort as SortBy,
     query as string
   );
@@ -24,7 +25,20 @@ export const getAll = async (req: Request, res: Response) => {
 
 export const getOne = async (req: Request, res: Response) => {
   const { itemId } = req.params;
-  const product = await productsService.getOne(itemId);
+
+  if (!itemId) {
+    res.sendStatus(400);
+
+    return;
+  }
+
+  const product = await phonesService.getOne(itemId);
+
+  if (!product) {
+    res.sendStatus(404);
+
+    return;
+  }
 
   res.send(product);
 };
@@ -43,6 +57,13 @@ export const getDiscount = async (req: Request, res: Response) => {
 
 export const getRecommended = async (req: Request, res: Response) => {
   const { itemId } = req.params;
+
+  if (!itemId) {
+    res.sendStatus(400);
+
+    return;
+  }
+
   const products = await productsService.getRecommended(itemId);
 
   res.send(products);
