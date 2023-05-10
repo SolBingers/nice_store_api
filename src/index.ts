@@ -12,7 +12,7 @@ const port = process.env.PORT || 3000;
 initDB();
 
 app.use(cors());
-app.use('/products', productsRouter.router);
+app.use('/products', express.json(), productsRouter.router);
 app.use(express.static('public'));
 
 app.listen(port, () => {

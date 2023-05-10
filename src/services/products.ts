@@ -1,13 +1,14 @@
 import { Phone } from '../models/Phone';
 import { Product } from '../models/Product';
-import sequelize from 'sequelize';
 
 function getDiscountPercent(price: number, fullPrice: number) {
   return 100 - price * 100 / fullPrice;
 }
 
-export function getAll() {
-  return Product.findAll();
+export async function getAll() {
+  const products = await Product.findAll();
+
+  return products;
 }
 
 export function getPage(page = 1, count = 8) {
