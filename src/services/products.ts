@@ -1,5 +1,6 @@
 import { Phone } from '../models/Phone';
 import { Product } from '../models/Product';
+import lodash from 'lodash';
 
 function getDiscountPercent(price: number, fullPrice: number) {
   return 100 - price * 100 / fullPrice;
@@ -45,8 +46,9 @@ export async function getRecommended(id: string) {
   const products = await Product.findAll();
 
   const recommended = products
-    .filter(product => !product.itemId.includes(id.split('-').slice(0, -2).join('-')))
-    .slice(0, 10);
+    .filter(product => {
+      return !product.itemId.includes(id.split('-').slice(0, -2).join('-'));
+    });
 
-  return recommended;
+  return lodash.shuffle(recommended).slice(0, 10);
 }
