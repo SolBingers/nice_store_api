@@ -2,11 +2,11 @@
   "name": "nice_store_api",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.ts",
+  "main": "index.js",
   "scripts": {
-    "build": "tsc",
-    "start": "nodemon ./src/index.ts",
-    "sync": "ts-node ./src/syncDB.ts"
+    "build": "npx tsc",
+    "start": "npx nodemon ./src/index.ts",
+    "sync": "npx ts-node ./src/syncDB.ts"
   },
   "repository": {
     "type": "git",
