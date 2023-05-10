@@ -15,8 +15,6 @@ initDB();
 app.use(cors());
 app.use('/static', express.static(path.join(__dirname, '../public')));
 
-console.log(__dirname);
-
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);
 });
