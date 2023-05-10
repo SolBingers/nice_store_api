@@ -20,3 +20,16 @@ export const getNew = async (req: Request, res: Response) => {
 
   res.send(products);
 };
+
+export const getDiscount = async (req: Request, res: Response) => {
+  const products = await productsService.getDiscount();
+
+  res.send(products);
+};
+
+export const getRecommended = async (req: Request, res: Response) => {
+  const { itemId } = req.params;
+  const products = await productsService.getRecommended(itemId);
+
+  res.send(products);
+};
