@@ -11,11 +11,13 @@ export async function getAll() {
   return products;
 }
 
-export function getPage(page = 1, count = 8) {
-  return Product.findAll({
+export async function getPage(page = 1, count = 8) {
+  const products = await Product.findAll({
     limit: count,
     offset: count * (page - 1),
   });
+
+  return products;
 }
 
 export function getOne(id: string) {
