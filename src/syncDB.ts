@@ -1,6 +1,6 @@
-import { initDB } from "./initDB"
-import { Phone } from "./models/Phone";
-import { Product } from "./models/Product";
+import { initDB } from './initDB';
+import { Phone } from './models/Phone';
+import { Product } from './models/Product';
 
 const syncDB = async () => {
   console.log('Start syncing');
@@ -10,6 +10,6 @@ const syncDB = async () => {
   await Product.sync({ alter: true });
 
   console.log('Tables successfully synced');
-}
+};
 
 syncDB();
