@@ -2,7 +2,8 @@ import { Product } from '../models/Product';
 import lodash from 'lodash';
 import { Category } from '../types/Category';
 import { SortBy } from '../types/SortBy';
-import { getDiscountPercent, sortProducts } from '../utils/helpers';
+import { getDiscountPercent, getOrderOption } from '../utils/helpers';
+import { OrderItem } from 'sequelize';
 
 export async function getAll() {
   const products = await Product.findAll();
@@ -15,11 +16,12 @@ export async function getPage(page = 1, count = 8, category: Category, sort: Sor
     where: {
       category,
     },
+    order: [getOrderOption(sort) as OrderItem],
     limit: count,
     offset: count * (page - 1),
   });
 
-  return sortProducts(products, sort);
+  return products;
 }
 
 export function getNew() {

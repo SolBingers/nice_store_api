@@ -5,6 +5,20 @@ export function getDiscountPercent(price: number, fullPrice: number) {
   return 100 - price * 100 / fullPrice;
 }
 
+export function getOrderOption(sort: SortBy) {
+  switch (sort) {
+  case SortBy.New:
+  default:
+    return ['year', 'DESC'];
+
+  case SortBy.Old:
+    return ['year', 'ASC'];
+
+  case SortBy.Cheap:
+    return ['price', 'ASC'];
+  }
+}
+
 export function sortProducts (products: Product[], sort: SortBy) {
   switch (sort) {
   case SortBy.Old:
