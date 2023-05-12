@@ -7,7 +7,7 @@ import { SortBy } from '../types/SortBy';
 export const getAll = async (req: Request, res: Response) => {
   const {
     page = 1, 
-    count = 8, 
+    count = 6, 
     category = Category.Phones, 
     query = '', 
     sort = SortBy.New

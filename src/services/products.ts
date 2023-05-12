@@ -11,7 +11,7 @@ export async function getAll() {
   return products;
 }
 
-export async function getPage(page = 1, count = 8, category: Category, sort: SortBy, query = '') {
+export async function getPage(page = 1, count = 6, category: Category, sort: SortBy, query = '') {
   const products = await Product.findAndCountAll({
     where: {
       category,
