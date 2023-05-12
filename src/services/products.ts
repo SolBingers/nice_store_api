@@ -12,7 +12,7 @@ export async function getAll() {
 }
 
 export async function getPage(page = 1, count = 8, category: Category, sort: SortBy, query = '') {
-  const products = await Product.findAll({
+  const products = await Product.findAndCountAll({
     where: {
       category,
     },
@@ -21,7 +21,10 @@ export async function getPage(page = 1, count = 8, category: Category, sort: Sor
     offset: count * (page - 1),
   });
 
-  return products;
+  return {
+    data: products.rows,
+    pages: Math.ceil(products.count / count),
+  };
 }
 
 export function getNew() {
