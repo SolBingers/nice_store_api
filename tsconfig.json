@@ -12,6 +12,7 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "strictPropertyInitialization": false,
+    "resolveJsonModule": true
   },
   "include": ["src/*", "src/index.ts", "src/breakpoints/phone", "src/models/Phone.ts"]
 }

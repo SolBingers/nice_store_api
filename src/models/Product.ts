@@ -4,13 +4,9 @@ import {
   Model,
   Column,
   AllowNull,
-  ForeignKey,
 } from 'sequelize-typescript';
-import { Phone } from './Phone';
 
-@Table({
-  tableName: 'products'
-})
+@Table({})
 
 export class Product extends Model {
   @Column({
@@ -25,13 +21,6 @@ export class Product extends Model {
   })
     category: string;
 
-  @AllowNull(false)
-  @Column({
-    type: DataTypes.STRING,
-  })
-    phoneId: string;
-
-  @ForeignKey(() => Phone)
   @AllowNull(false)
   @Column({
     type: DataTypes.STRING,
