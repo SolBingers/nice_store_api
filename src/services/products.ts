@@ -1,6 +1,5 @@
 import { Product } from '../models/Product';
 import lodash from 'lodash';
-import { Category } from '../types/Category';
 import { SortBy } from '../types/SortBy';
 import { getDiscountPercent, getOrderOption } from '../utils/helpers';
 import { OrderItem } from 'sequelize';
@@ -11,11 +10,8 @@ export async function getAll() {
   return products;
 }
 
-export async function getPage(page = 1, count = 6, category: Category, sort: SortBy, query = '') {
+export async function getPage(page = 1, count = 6, sort: SortBy, query = '') {
   const products = await Product.findAndCountAll({
-    where: {
-      category,
-    },
     order: [getOrderOption(sort) as OrderItem],
     limit: count,
     offset: count * (page - 1),
@@ -25,6 +21,60 @@ export async function getPage(page = 1, count = 6, category: Category, sort: Sor
     data: products.rows,
     pages: Math.ceil(products.count / count),
   };
+}
+
+export async function getPhonesPage(page = 1, count = 6, sort: SortBy, query = '') {
+  const phones = await Product.findAndCountAll({
+    where: {
+      category: 'phones'
+    },
+    order: [getOrderOption(sort) as OrderItem],
+    limit: count,
+    offset: count * (page - 1),
+  });
+
+  return {
+    data: phones.rows,
+    pages: Math.ceil(phones.count / count),
+  };
+}
+
+export async function getTabletsPage(page = 1, count = 6, sort: SortBy, query = '') {
+  const tablets = await Product.findAndCountAll({
+    where: {
+      category: 'tablets'
+    },
+    order: [getOrderOption(sort) as OrderItem],
+    limit: count,
+    offset: count * (page - 1),
+  });
+
+  return {
+    data: tablets.rows,
+    pages: Math.ceil(tablets.count / count),
+  };
+}
+
+export async function getAccessoriesPage(page = 1, count = 6, sort: SortBy, query = '') {
+  const accessories = await Product.findAndCountAll({
+    where: {
+      category: 'accessories'
+    },
+    order: [getOrderOption(sort) as OrderItem],
+    limit: count,
+    offset: count * (page - 1),
+  });
+
+  return {
+    data: accessories.rows,
+    pages: Math.ceil(accessories.count / count),
+  };
+}
+
+export function getOne(itemId: string) {
+  return Product.findOne({
+    where: { itemId }
+  });
 }
 
 export function getNew() {
@@ -49,7 +99,7 @@ export async function getRecommended(id: string) {
 
   const recommended = products
     .filter(product => {
-      return !product.itemId.includes(id.split('-').slice(0, -2).join('-'));
+      return !id.split('-').slice(0, -2).join('-').includes(product.itemId);
     });
 
   return lodash.shuffle(recommended).slice(0, 10);
