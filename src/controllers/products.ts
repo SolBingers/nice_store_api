@@ -9,6 +9,10 @@ import { Phone } from '../models/Phone';
 import { Accessory } from '../models/Accessory';
 import { Tablet } from '../models/Tablet';
 
+const getSearchQuery = (query: string) => {
+  return query.toLocaleLowerCase().split('-').join('%');
+};
+
 export const getAll = async (req: Request, res: Response) => {
   const {
     page = 1, 
@@ -16,11 +20,12 @@ export const getAll = async (req: Request, res: Response) => {
     query = '', 
     sort = SortBy.New
   } = req.query;
+  const searchQuery = getSearchQuery(query as string);
   const products = await productsService.getPage(
     Number(page),
     Number(count),
     sort as SortBy,
-    query as string
+    searchQuery
   );
 
   res.send(products);
@@ -33,11 +38,12 @@ export const getPhones = async (req: Request, res: Response) => {
     query = '',
     sort = SortBy.New
   } = req.query;
+  const searchQuery = getSearchQuery(query as string);
   const phones = await productsService.getPhonesPage(
     Number(page),
     Number(count),
     sort as SortBy,
-    query as string
+    searchQuery
   );
 
   res.send(phones);
@@ -50,11 +56,12 @@ export const getTablets = async (req: Request, res: Response) => {
     query = '',
     sort = SortBy.New
   } = req.query;
+  const searchQuery = getSearchQuery(query as string);
   const tablets = await productsService.getTabletsPage(
     Number(page),
     Number(count),
     sort as SortBy,
-    query as string
+    searchQuery
   );
 
   res.send(tablets);
@@ -67,11 +74,12 @@ export const getAccessories = async (req: Request, res: Response) => {
     query = '',
     sort = SortBy.New
   } = req.query;
+  const searchQuery = getSearchQuery(query as string);
   const accessories = await productsService.getAccessoriesPage(
     Number(page),
     Number(count),
     sort as SortBy,
-    query as string
+    searchQuery
   );
 
   res.send(accessories);

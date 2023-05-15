@@ -3,6 +3,9 @@ import lodash from 'lodash';
 import { SortBy } from '../types/SortBy';
 import { getDiscountPercent, getOrderOption } from '../utils/helpers';
 import { OrderItem } from 'sequelize';
+import Sequelize from 'sequelize';
+
+const Op = Sequelize.Op;
 
 export async function getAll() {
   const products = await Product.findAll();
@@ -12,6 +15,11 @@ export async function getAll() {
 
 export async function getPage(page = 1, count = 6, sort: SortBy, query = '') {
   const products = await Product.findAndCountAll({
+    where: {
+      itemId: {
+        [Op.like]: `%${query}%`
+      }
+    },
     order: [getOrderOption(sort) as OrderItem],
     limit: count,
     offset: count * (page - 1),
@@ -24,9 +32,13 @@ export async function getPage(page = 1, count = 6, sort: SortBy, query = '') {
 }
 
 export async function getPhonesPage(page = 1, count = 6, sort: SortBy, query = '') {
+  console.log(query);
   const phones = await Product.findAndCountAll({
     where: {
-      category: 'phones'
+      category: 'phones',
+      itemId: {
+        [Op.like]: `%${query}%`
+      }
     },
     order: [getOrderOption(sort) as OrderItem],
     limit: count,
@@ -42,7 +54,10 @@ export async function getPhonesPage(page = 1, count = 6, sort: SortBy, query = '
 export async function getTabletsPage(page = 1, count = 6, sort: SortBy, query = '') {
   const tablets = await Product.findAndCountAll({
     where: {
-      category: 'tablets'
+      category: 'tablets',
+      itemId: {
+        [Op.like]: `%${query}%`
+      }
     },
     order: [getOrderOption(sort) as OrderItem],
     limit: count,
@@ -58,7 +73,10 @@ export async function getTabletsPage(page = 1, count = 6, sort: SortBy, query = 
 export async function getAccessoriesPage(page = 1, count = 6, sort: SortBy, query = '') {
   const accessories = await Product.findAndCountAll({
     where: {
-      category: 'accessories'
+      category: 'accessories',
+      itemId: {
+        [Op.like]: `%${query}%`
+      }
     },
     order: [getOrderOption(sort) as OrderItem],
     limit: count,
