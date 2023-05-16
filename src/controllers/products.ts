@@ -70,10 +70,10 @@ export const getTablets = async (req: Request, res: Response) => {
 
 export const getAccessories = async (req: Request, res: Response) => {
   const {
-    page = 1,
-    count = 6,
-    query = '',
-    sort = SortBy.New
+    page = 1, 
+    count = 6, 
+    query = '', 
+    sort = SortBy.New 
   } = req.query;
   const searchQuery = getSearchQuery(query as string);
   const accessories = await productsService.getAccessoriesPage(
