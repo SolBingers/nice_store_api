@@ -7,8 +7,14 @@ import Sequelize from 'sequelize';
 
 const Op = Sequelize.Op;
 
-export async function getAll() {
-  const products = await Product.findAll();
+export async function getAll(query = '') {
+  const products = await Product.findAll({
+    where: {
+      itemId: {
+        [Op.like]: `%${query}%`
+      }
+    }
+  });
 
   return products;
 }
