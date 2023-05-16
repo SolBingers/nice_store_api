@@ -15,17 +15,12 @@ const getSearchQuery = (query: string) => {
 
 export const getAll = async (req: Request, res: Response) => {
   const {
-    page,
+    page = 1,
     count = 6,
     query = '',
     sort = SortBy.New
   } = req.query;
   const searchQuery = getSearchQuery(query as string);
-  if (!page) {
-    const products = await productsService.getAll(searchQuery);
-    res.send(products);
-    return;
-  }
 
   const products = await productsService.getPage(
     Number(page),
