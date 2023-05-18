@@ -1,10 +1,9 @@
 import { initDB } from './initDB';
 import { Accessory } from './models/Accessory';
+import { Favorite } from './models/Favorite';
 import { Phone } from './models/Phone';
 import { Product } from './models/Product';
 import { Tablet } from './models/Tablet';
-import { Token } from './models/Token';
-import { User } from './models/User';
 
 const syncDB = async () => {
   console.log('Start syncing');
@@ -14,8 +13,7 @@ const syncDB = async () => {
   await Tablet.sync({ alter: true });
   await Accessory.sync({ alter: true });
   await Product.sync({ alter: true });
-  await User.sync({ alter: true });
-  await Token.sync({ alter: true });
+  await Favorite.sync({ force: true });
 
   console.log('Tables successfully synced');
 };

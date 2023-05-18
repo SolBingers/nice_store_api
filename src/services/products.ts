@@ -101,6 +101,10 @@ export function getOne(itemId: string) {
   });
 }
 
+export function getById(id: number) {
+  return Product.findByPk(id);
+}
+
 export function getNew() {
   return Product.findAll({
     limit: 10,
