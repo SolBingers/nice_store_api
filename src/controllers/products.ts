@@ -8,6 +8,7 @@ import { Category } from '../types/Category';
 import { Phone } from '../models/Phone';
 import { Accessory } from '../models/Accessory';
 import { Tablet } from '../models/Tablet';
+import { DEFAULT_PER_PAGE, DEFAULT_PAGE } from '../utils/constants';
 
 const getSearchQuery = (query: string) => {
   return query.toLocaleLowerCase().split('-').join('%');
@@ -15,8 +16,8 @@ const getSearchQuery = (query: string) => {
 
 export const getAll = async (req: Request, res: Response) => {
   const {
-    page = 1,
-    count = 6,
+    page = DEFAULT_PAGE,
+    count = DEFAULT_PER_PAGE,
     query = '',
     sort = SortBy.New
   } = req.query;
@@ -34,8 +35,8 @@ export const getAll = async (req: Request, res: Response) => {
 
 export const getPhones = async (req: Request, res: Response) => {
   const {
-    page = 1,
-    count = 6,
+    page = DEFAULT_PAGE,
+    count = DEFAULT_PER_PAGE,
     query = '',
     sort = SortBy.New
   } = req.query;
@@ -52,8 +53,8 @@ export const getPhones = async (req: Request, res: Response) => {
 
 export const getTablets = async (req: Request, res: Response) => {
   const {
-    page = 1,
-    count = 6,
+    page = DEFAULT_PAGE,
+    count = DEFAULT_PER_PAGE,
     query = '',
     sort = SortBy.New
   } = req.query;
@@ -70,8 +71,8 @@ export const getTablets = async (req: Request, res: Response) => {
 
 export const getAccessories = async (req: Request, res: Response) => {
   const {
-    page = 1, 
-    count = 6, 
+    page = DEFAULT_PAGE, 
+    count = DEFAULT_PER_PAGE, 
     query = '', 
     sort = SortBy.New 
   } = req.query;

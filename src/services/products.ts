@@ -4,6 +4,7 @@ import { SortBy } from '../types/SortBy';
 import { getDiscountPercent, getOrderOption } from '../utils/helpers';
 import { OrderItem } from 'sequelize';
 import Sequelize from 'sequelize';
+import { DEFAULT_PER_PAGE, DEFAULT_PAGE } from '../utils/constants';
 
 const Op = Sequelize.Op;
 
@@ -19,7 +20,7 @@ export async function getAll(query = '') {
   return products;
 }
 
-export async function getPage(page = 1, count = 6, sort: SortBy, query = '') {
+export async function getPage(page = DEFAULT_PAGE, count = DEFAULT_PER_PAGE, sort: SortBy, query = '') {
   const products = await Product.findAndCountAll({
     where: {
       itemId: {
@@ -37,7 +38,7 @@ export async function getPage(page = 1, count = 6, sort: SortBy, query = '') {
   };
 }
 
-export async function getPhonesPage(page = 1, count = 6, sort: SortBy, query = '') {
+export async function getPhonesPage(page = DEFAULT_PAGE, count = DEFAULT_PER_PAGE, sort: SortBy, query = '') {
   console.log(query);
   const phones = await Product.findAndCountAll({
     where: {
@@ -57,7 +58,7 @@ export async function getPhonesPage(page = 1, count = 6, sort: SortBy, query = '
   };
 }
 
-export async function getTabletsPage(page = 1, count = 6, sort: SortBy, query = '') {
+export async function getTabletsPage(page = DEFAULT_PAGE, count = DEFAULT_PER_PAGE, sort: SortBy, query = '') {
   const tablets = await Product.findAndCountAll({
     where: {
       category: 'tablets',
@@ -76,7 +77,7 @@ export async function getTabletsPage(page = 1, count = 6, sort: SortBy, query = 
   };
 }
 
-export async function getAccessoriesPage(page = 1, count = 6, sort: SortBy, query = '') {
+export async function getAccessoriesPage(page = DEFAULT_PAGE, count = DEFAULT_PER_PAGE, sort: SortBy, query = '') {
   const accessories = await Product.findAndCountAll({
     where: {
       category: 'accessories',
