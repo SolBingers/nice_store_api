@@ -5,12 +5,13 @@ import { Accessory } from './models/Accessory';
 import { Product } from './models/Product';
 import { Favorite } from './models/Favorite';
 import 'dotenv/config.js';
+import { Cart } from './models/Cart';
 
 const { DB_URI = '' } = process.env;
 
 export const initDB = async () => {
   const sequelize = new Sequelize(DB_URI, {
-    models: [Phone, Tablet, Accessory, Product, Favorite],
+    models: [Phone, Tablet, Accessory, Product, Favorite, Cart],
     dialectOptions: {
       ssl: true,
     },

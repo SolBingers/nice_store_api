@@ -32,3 +32,7 @@ export function deleteOne(id: number) {
     where: { id }
   });
 }
+
+export function getById(id: number) {
+  return Favorite.findByPk(id);
+}

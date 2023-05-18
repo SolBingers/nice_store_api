@@ -4,6 +4,7 @@ import cors from 'cors';
 import { initDB } from './initDB';
 import * as productsRouter from './routes/products';
 import * as favoritesRouter from './routes/favorites';
+import * as cartRouter from './routes/cart';
 import { errorMiddleware } from './middlewares/error';
 
 dotenv.config();
@@ -19,6 +20,8 @@ app.use(express.json());
 app.use('/products', productsRouter.router);
 
 app.use('/favorites', favoritesRouter.router);
+
+app.use('/cart', cartRouter.router);
 
 app.use(express.static('public'));
 
