@@ -5,6 +5,7 @@ import { Phone } from './models/Phone';
 import { Product } from './models/Product';
 import { Tablet } from './models/Tablet';
 import { Cart } from './models/Cart';
+import { Order } from './models/Order';
 
 const syncDB = async () => {
   console.log('Start syncing');
@@ -16,6 +17,7 @@ const syncDB = async () => {
   await Product.sync({ alter: true });
   await Favorite.sync({ alter: true });
   await Cart.sync({ alter: true });
+  await Order.sync({ alter: true });
 
   console.log('Tables successfully synced');
 };

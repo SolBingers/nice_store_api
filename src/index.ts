@@ -5,6 +5,7 @@ import { initDB } from './initDB';
 import * as productsRouter from './routes/products';
 import * as favoritesRouter from './routes/favorites';
 import * as cartRouter from './routes/cart';
+import * as ordersRouter from './routes/orders';
 import { errorMiddleware } from './middlewares/error';
 
 dotenv.config();
@@ -22,6 +23,8 @@ app.use('/products', productsRouter.router);
 app.use('/favorites', favoritesRouter.router);
 
 app.use('/cart', cartRouter.router);
+
+app.use('/orders', ordersRouter.router);
 
 app.use(express.static('public'));
 
