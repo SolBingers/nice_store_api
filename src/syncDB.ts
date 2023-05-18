@@ -13,7 +13,7 @@ const syncDB = async () => {
   await Tablet.sync({ alter: true });
   await Accessory.sync({ alter: true });
   await Product.sync({ alter: true });
-  await Favorite.sync({ force: true });
+  await Favorite.sync({ alter: true });
 
   console.log('Tables successfully synced');
 };
