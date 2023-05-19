@@ -8,6 +8,12 @@ import { DEFAULT_PER_PAGE, DEFAULT_PAGE } from '../utils/constants';
 
 const Op = Sequelize.Op;
 
+export function getProductCard(itemId: string) {
+  return Product.findOne({
+    where: { itemId }
+  });
+}
+
 export async function getAll(query = '') {
   const products = await Product.findAll({
     where: {

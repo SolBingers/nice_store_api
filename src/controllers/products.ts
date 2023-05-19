@@ -14,6 +14,20 @@ const getSearchQuery = (query: string) => {
   return query.toLocaleLowerCase().split('-').join('%');
 };
 
+export const getProductCard = async (req: Request, res: Response) => {
+  const { itemId } = req.params;
+  console.log(itemId);
+
+  if (!itemId) {
+    res.sendStatus(400);
+    return;
+  }
+
+  const card = await productsService.getProductCard(itemId);
+
+  res.send(card);
+};
+
 export const getAll = async (req: Request, res: Response) => {
   const {
     page = DEFAULT_PAGE,
