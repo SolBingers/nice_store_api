@@ -1,3 +1,54 @@
+# Nice Store API Backend
+
+This repository contains the backend code for the Nice Store API. The Nice Store API provides a RESTful interface for managing e-commerce functionalities such as retrieving products, creating orders, and retrieving order details.
+
+## Front-End
+
+You can see the other side [HERE](https://github.com/SolBingers/nice_store)
+And watch the [DEMO](https://solbingers.github.io/nice_store/)
+
+## Installation
+
+1. Clone the repository:
+
+   ```
+   git clone https://github.com/SolBingers/nice_store_api.git
+   ```
+
+2. Navigate to the project directory:
+
+   ```
+   cd nice_store_api
+   ```
+
+3. Install the dependencies:
+
+   ```
+   npm install
+   ```
+
+4. Set up environment variables:
+
+   - Create a `.env` file in the project root.
+   - Add the following environment variables to the `.env` file:
+
+     ```
+     PORT=3000
+     API_KEY=your_api_key
+     ```
+
+     Replace `your_api_key` with your actual API key for authentication.
+
+5. Start the server:
+
+   ```
+   npm start
+   ```
+
+   The server should now be running on `http://localhost:3000`.
+
+
+
 # Nice Store API Documentation
 
 Welcome to the documentation for the Nice Store REST API. This API allows you to interact with the Nice Store platform and perform various operationsf. The API is designed to be simple, intuitive, and follows the principles of Representational State Transfer (REST).
