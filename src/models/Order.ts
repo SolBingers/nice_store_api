@@ -5,6 +5,7 @@ import {
   Column, 
   AllowNull 
 } from 'sequelize-typescript';
+import { Product } from '../types/Product';
 
 @Table({})
 export class Order extends Model {
@@ -18,7 +19,7 @@ export class Order extends Model {
   @Column({
     type: DataTypes.ARRAY(DataTypes.JSON)
   })
-    products: { productId: string, count: number }[];
+    products: Product[];
 
   @AllowNull(false)
   @Column({
