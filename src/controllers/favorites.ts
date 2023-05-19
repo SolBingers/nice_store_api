@@ -1,7 +1,5 @@
 import { Request, Response } from 'express';
 import * as favoritesService from '../services/favorites';
-import * as productsService from '../services/products';
-import { Favorite } from '../models/Favorite';
 
 export const getByUserId = async (req: Request, res: Response) => {
   const { userId } = req.params;
@@ -31,7 +29,7 @@ export const addOne = async (req: Request, res: Response) => {
   if (isCreated) {
     await favoritesService.addOne(userId, itemIds);
 
-    res.sendStatus(200);
+    res.send({ message: 'Updated' });
     return;
   }
 
