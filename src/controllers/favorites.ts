@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import * as favoritesService from '../services/favorites';
 import * as productsService from '../services/products';
+import { Favorite } from '../models/Favorite';
 
 export const getByUserId = async (req: Request, res: Response) => {
   const { userId } = req.params;
@@ -17,43 +18,26 @@ export const getByUserId = async (req: Request, res: Response) => {
 };
 
 export const addOne = async (req: Request, res: Response) => {
-  const { userId, productId } = req.body;
+  const { userId, itemIds } = req.body;
 
-  if (!userId || !productId) {
+  if (!userId || !Array.isArray(itemIds)) {
     res.sendStatus(400);
 
     return;
   }
 
-  const product = productsService.getById(productId);
+  const isCreated = await favoritesService.getByUserId(userId);
 
-  if (!product) {
-    res.sendStatus(404);
+  if (isCreated) {
+    await favoritesService.addOne(userId, itemIds);
+
+    res.sendStatus(200);
     return;
   }
 
-  const favourite = await favoritesService.addOne(userId, productId);
+  const favorites = await favoritesService.createOne(userId, itemIds);
 
-  res.send(favourite);
-};
+  res.send(favorites);
 
-export const deleteOne = async (req: Request, res: Response) => {
-  const { id } = req.params;
-
-  if (!id) {
-    res.sendStatus(400);
-
-    return;
-  }
-
-  const favorite = await favoritesService.getById(Number(id));
-
-  if (!favorite) {
-    res.sendStatus(404);
-    return;
-  }
-
-  await favoritesService.deleteOne(Number(id));
-
-  res.sendStatus(200);
+  return;
 };

@@ -10,9 +10,9 @@ import {
 export class Favorite extends Model {
   @AllowNull(false)
   @Column({
-    type: DataTypes.STRING
+    type: DataTypes.ARRAY(DataTypes.STRING)
   })
-    productId: string;
+    itemIds: string[];
 
   @AllowNull(false)
   @Column({

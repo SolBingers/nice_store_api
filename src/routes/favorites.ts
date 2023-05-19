@@ -6,4 +6,3 @@ export const router = express.Router();
 
 router.get('/:userId', catchError(favoritesController.getByUserId));
 router.post('/', catchError(favoritesController.addOne));
-router.delete('/:id', catchError(favoritesController.deleteOne));
